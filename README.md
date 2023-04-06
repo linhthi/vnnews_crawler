@@ -13,14 +13,14 @@ pip install -r requirements.txt
 ## Usage
 You can run the script using the following command in the terminal:
 ```
-python scrape_vnexpress.py -c category -p page
+python scrape_vnexpress.py -c <category> -p <pages> -o <output_folder>
 ```
 Replace category with the category of articles you want to crawl (e.g. giao-duc, khoa-hoc, the-thao, kinh-doanh, suc-khoe, the-gioi, giai-tri, du-lich, so-hoa, thoi-su, phap-luat, or all for all categories), and page with the number of pages you want to crawl (default is 1).
 
 For example, to crawl all articles from the giao-duc category on the first 2 pages, run the following command:
 
 ```
-python scrape_vnexpress.py -c giao-duc -p 2
+python scrape_vnexpress.py -c giao-duc -p 2 -o data_vnexpress
 ```
 The script will create a directory named dataset_vnexpress in the current directory and save the crawled articles to CSV files inside this directory, with each file named category_pageX.csv, where category is the name of the category and X is the page number.
 
