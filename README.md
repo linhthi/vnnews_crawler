@@ -27,13 +27,14 @@ The script will create a directory named dataset_vnexpress in the current direct
 ## Output format
 The CSV files contain the following fields for each article:
 
-id: the unique ID of the article
-title: the title of the article
-author: the author of the article
-updatetime: the date and time when the article was last updated
-wordcount: the word count of the article
-publication: the name of the publication that the article belongs to
-tags: the tags associated with the article
-content: the content of the article
+- id: the unique ID of the article
+- title: the title of the article
+- url: url of the article
+- author: the author of the article
+- updatetime: the date and time when the article was last updated
+- wordcount: the word count of the article
+- publication: the name of the publication that the article belongs to
+- tags: the tags associated with the article
+- content: the content of the article
 ## License
 This script is released under the [MIT License](https://opensource.org/licenses/MIT).
