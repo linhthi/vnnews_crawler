@@ -27,7 +27,7 @@ def get_urls_of_type(article_type: str, total_pages: int = 1) -> list[str]:
 
     return articles_urls
 
-def main(category, page):
+def main(category, page, output_folder):
     if category == "all":
         categories = ["giao-duc", "khoa-hoc", "the-thao", "kinh-doanh", "suc-khoe", "the-gioi", "giai-tri", "du-lich", "so-hoa", "thoi-su", "phap-luat"]
     else:
@@ -67,7 +67,7 @@ def main(category, page):
 
         print(f"Number of articles downloaded from {category}: {len(articles)}")
         # Save data to a CSV file
-        with open(f'./dataset_vnexpress/{category}_page{page}.csv', 'w', newline='', encoding='utf-8') as file:
+        with open(f'{output_folder}/{category}_page{page}.csv', 'w', newline='', encoding='utf-8') as file:
             writer = csv.DictWriter(file, fieldnames=["id", "title", "author", "updatetime", "wordcount", "publication", "tags", "content"])
             writer.writeheader()
             writer.writerows(articles)
@@ -76,6 +76,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Scrape articles from VnExpress.net')
     parser.add_argument('-c', '--category', type=str, default="all", help="Category of articles to scrape. Available options: giao-duc, khoa-hoc, the-thao, kinh-doanh, suc-khoe, the-gioi, giai-tri, du-lich, so-hoa, thoi-su, phap-luat")
     parser.add_argument('-p', '--page', type=int, default=1, help="Number of pages to scrape")
+    parser.add_argument('-o', '--output', type=str, default="./dataset_vnexpress", help="Output folder to store the scraped data")
     args = parser.parse_args()
 
-    main(args.category, args.page)
+    main(args.category, args.page, args.output)
