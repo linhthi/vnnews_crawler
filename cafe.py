@@ -4,6 +4,12 @@ import csv
 import argparse
 import tqdm
 
+url = "https://cafef.vn/"
+
+cat_id = {
+    "xa-hoi": "188112"
+}
+
 def get_urls_of_type(article_type: str, total_pages: int = 1) -> list[str]:
     """
     Get urls of articles in specific type 
@@ -13,10 +19,10 @@ def get_urls_of_type(article_type: str, total_pages: int = 1) -> list[str]:
     """
     articles_urls = list()
     for i in tqdm.tqdm(range(1, total_pages+1)):
-        content = requests.get(f"https://vnexpress.net/{article_type}-p{i}").content
+        content = requests.get(f"https://cafef.vn/timelinelist/188112/{i}.chn").content
         print(str(content)[:100], len(content))
         soup = BeautifulSoup(content, "html.parser")
-        titles = soup.find_all(class_="title-news")
+        titles = soup.find_all("h3")
 
         if (len(titles) == 0):
             # print(f"Couldn't find any news in the category {article_type} on page {i}")
@@ -30,17 +36,18 @@ def get_urls_of_type(article_type: str, total_pages: int = 1) -> list[str]:
 
 def main(category, page, output_folder):
     if category == "all":
-        categories = ["giao-duc", "khoa-hoc", "the-thao", "kinh-doanh", "suc-khoe", "the-gioi", "giai-tri", "du-lich", "so-hoa", "thoi-su", "phap-luat"]
+        categories = ["xa-hoi",]
     else:
         categories = [category]
 
     for category in categories:
         urls = get_urls_of_type(category, page)
+        print(urls)
 
         # Fetch content of articles
         articles = []
         for link in urls:
-            article_page = BeautifulSoup(requests.get(link).content, 'html.parser')
+            article_page = BeautifulSoup(requests.get(url+link).content, 'html.parser')
             article_id = article_page.find('meta', {"name": 'its_id'})['content']
             article_author = article_page.find('meta', {"name": 'its_author'})['content']
             article_wordcount = article_page.find('meta', {"name": 'its_wordcount'})['content']
