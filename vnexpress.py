@@ -68,7 +68,7 @@ def main(category, page, output_folder):
         print(f"Number of articles downloaded from {category}: {len(articles)}")
         # Save data to a CSV file
         with open(f'{output_folder}/{category}_page{page}.csv', 'w', newline='', encoding='utf-8') as file:
-            writer = csv.DictWriter(file, fieldnames=["id", "title", "author", "updatetime", "wordcount", "publication", "tags", "content"])
+            writer = csv.DictWriter(file, fieldnames=["id", "title", "url", "author", "updatetime", "wordcount", "publication", "tags", "content"])
             writer.writeheader()
             writer.writerows(articles)
 
