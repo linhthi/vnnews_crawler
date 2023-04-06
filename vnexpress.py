@@ -55,6 +55,7 @@ def main(category, page):
             article = {
                 "id": article_id,
                 "title": article_title,
+                "url: link,
                 "author": article_author,
                 "updatetime": article_updatetime,
                 "wordcount": article_wordcount,
